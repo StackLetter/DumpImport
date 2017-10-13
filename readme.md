@@ -8,7 +8,7 @@ Semi-automatic Stack Exchange XML dumps to Postgres importer.
 This project requires **PHP 7.0+**, and Composer dependencies defined in `composer.json`.
 Run `composer install` to install required dependencies.
 Database configuration is expected to be in `config.db.json` file, formatted according
-to [Neevo DBAL](https://neevo.smasty.net) format.
+to [Neevo DBAL](https://neevo.smasty.net) format. Example configuration is included in `config.db.example.json`.
 
 
 ## Usage

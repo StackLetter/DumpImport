@@ -1,0 +1,7 @@
+{
+  "driver": "PgSQL",
+  "host": "localhost",
+  "dbname": "stack_exchange",
+  "user": "postgres",
+  "password": "nbusr123"
+}
