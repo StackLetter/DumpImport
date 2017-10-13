@@ -1,0 +1,127 @@
+{
+  "site_id": 1,
+
+  "jobs": {
+
+    "users": {
+      "callback": "processBasicFile",
+      "input": "Users.xml",
+      "output": "users.sql",
+      "table": "users",
+      "defaults": ["created_at", "updated_at"],
+
+      "columns": {
+        "Id":             ["external_id", "int"],
+        "Reputation":     ["reputation",  "int"],
+        "CreationDate":   ["creation_date", "timestamp"],
+        "LastAccessDate": ["last_access_date", "timestamp"],
+        "DisplayName":    ["display_name", "string"],
+        "WebsiteUrl":     ["website_url", "string"],
+        "Location":       ["location", "string"],
+        "Age":            ["age", "int"]
+      }
+    },
+
+
+    "questions": {
+      "callback": "processQuestions",
+      "input": "Posts.xml",
+      "output": "questions.sql",
+      "table": "questions",
+      "defaults": ["created_at", "updated_at", "site_id"],
+
+      "columns": {
+        "Id":                 ["external_id", "int"],
+        "Score":              ["score",  "int"],
+        "CreationDate":       ["creation_date", "timestamp"],
+        "LastActivityDate":   ["last_activity_date", "timestamp"],
+        "ClosedDate":         ["closed_date", "timestamp"],
+        "CommunityOwnedDate": ["community_owned_date", "timestamp"],
+        "Body":               ["body", "string"],
+        "Title":              ["title", "string"],
+        "OwnerUserId":        ["owner_id", "X.user_id"],
+        "XIsAnswered":        ["is_answered", "NULL.is_answered"]
+      }
+    },
+
+
+    "answers": {
+      "callback": "processAnswers",
+      "input": "Posts.xml",
+      "output": "answers.sql",
+      "table": "answers",
+      "defaults": ["created_at", "updated_at", "site_id"],
+
+      "columns": {
+        "Id":                 ["external_id", "int"],
+        "Score":              ["score",  "int"],
+        "CreationDate":       ["creation_date", "timestamp"],
+        "LastActivityDate":   ["last_activity_date", "timestamp"],
+        "CommunityOwnedDate": ["community_owned_date", "timestamp"],
+        "Body":               ["body", "string"],
+        "OwnerUserId":        ["owner_id", "X.user_id"],
+        "ParentId":           ["question_id", "X.question_id"]
+      }
+    },
+
+
+    "comments": {
+      "callback": "processBasicFile",
+      "input": "Comments.xml",
+      "output": "comments.sql",
+      "table": "comments",
+      "defaults": ["created_at", "updated_at", "site_id"],
+
+      "columns": {
+        "Id":           ["external_id", "int"],
+        "Score":        ["score",  "int"],
+        "CreationDate": ["creation_date", "timestamp"],
+        "Text":         ["body", "string"],
+        "UserId":       ["owner_id", "X.user_id"],
+        "XQuestionId":  ["question_id", "NULL.comment.question_id"],
+        "XAnswerId":    ["answer_id", "NULL.comment.answer_id"],
+        "XPostType":    ["post_type", "NULL.comment.post_type"]
+      }
+    },
+
+
+    "tags": {
+      "callback": "processPostTags",
+      "input": "Posts.xml",
+      "output_questions": "question_tags.sql",
+      "output_answers": "answer_tags.sql",
+
+      "questions": {
+        "table": "question_tags",
+        "defaults": ["created_at", "updated_at"],
+        "columns": {
+          "X": ["question_id", "int"],
+          "Y": ["tag_id", "int"]
+        }
+      },
+
+      "answers": {
+        "table": "answer_tags",
+        "defaults": ["created_at", "updated_at"],
+        "columns": {
+          "X": ["answer_id", "int"],
+          "Y": ["tag_id", "int"]
+        }
+      }
+    },
+
+
+    "badges": {
+      "callback": "processBasicFile",
+      "input": "Badges.xml",
+      "output": "user_badges.sql",
+      "table": "user_badges",
+      "defaults": ["created_at", "updated_at"],
+
+      "columns": {
+        "UserId": ["user_id", "X.user_id"],
+        "Name":   ["badge_id", "X.badge_id"]
+      }
+    }
+  }
+}

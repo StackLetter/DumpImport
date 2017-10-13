@@ -1,0 +1,109 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "6205e54a7ec94d9aec45d9614e9f78fa",
+    "content-hash": "8e44c7def0c0388847b38b74a951326b",
+    "packages": [
+        {
+            "name": "prewk/xml-string-streamer",
+            "version": "0.11.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/prewk/xml-string-streamer.git",
+                "reference": "5c167c835b07d44d4d9412febe031a09a69dafbd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/prewk/xml-string-streamer/zipball/5c167c835b07d44d4d9412febe031a09a69dafbd",
+                "reference": "5c167c835b07d44d4d9412febe031a09a69dafbd",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.8.0",
+                "phpunit/phpunit": "^4.8 || ^5.7.21",
+                "prewk/xml-faker": "^0.0.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Prewk\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "prewk",
+                    "email": "oskar.thornblad@gmail.com"
+                }
+            ],
+            "description": "Stream large XML files with low memory consumption",
+            "homepage": "https://github.com/prewk/xml-string-streamer",
+            "time": "2017-10-03 21:15:29"
+        },
+        {
+            "name": "smasty/neevo",
+            "version": "v2.3.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/smasty/Neevo.git",
+                "reference": "3a1bf7e8ce24d453bb27dca3a9aca86852789f11"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/smasty/Neevo/zipball/3a1bf7e8ce24d453bb27dca3a9aca86852789f11",
+                "reference": "3a1bf7e8ce24d453bb27dca3a9aca86852789f11",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~3.7@dev"
+            },
+            "suggest": {
+                "ext-memcache": "Install Memcache to use it as a cache storage.",
+                "smasty/neevo-nette-ext": "Neevo extension for Nette Framework."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Neevo": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Smasty",
+                    "homepage": "http://smasty.net"
+                }
+            ],
+            "description": "Tiny but powerful database abstraction layer",
+            "homepage": "http://neevo.smasty.net",
+            "keywords": [
+                "database",
+                "dbal"
+            ],
+            "time": "2017-10-04 21:51:13"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

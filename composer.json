@@ -1,0 +1,6 @@
+{
+    "require": {
+        "prewk/xml-string-streamer": "^0.11.0",
+        "smasty/neevo": "^2.3"
+    }
+}
