@@ -165,9 +165,9 @@ class DumpImport{
                 }
                 fwrite($f, $str . "\n");
                 $i++;
-            }
-            if($i % 1000 == 0){
-                echo "Processed: $i\n";
+                if($i % 1000 == 0){
+                    echo "Processed: $i\n";
+                }
             }
         }
 
