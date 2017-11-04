@@ -65,6 +65,14 @@
     },
 
 
+    "accepted": {
+      "callback": "processacceptedAnswers",
+      "input": "Posts.xml",
+      "output": "accepted.sql",
+      "table": "questions"
+    },
+
+
     "comments": {
       "callback": "processBasicFile",
       "input": "Comments.xml",

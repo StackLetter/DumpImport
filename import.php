@@ -231,6 +231,29 @@ class DumpImport{
     }
 
 
+    public function processAcceptedAnswers($filename, $settings){
+        $streamer = XmlStringStreamer::createStringWalkerParser($this->dataDir . '/' . $filename);
+        echo "Processing file $filename...\n";
+        $f = fopen($this->dataDir . '/' . $settings['output'], 'w');
+
+        $i = 0;
+        while($node = $streamer->getNode()){
+            $xml = simplexml_load_string($node);
+
+            if($xml['PostTypeId'] != '1' || !isset($xml['AcceptedAnswerId'])){
+                continue;
+            }
+            $answer_id = $this->getExternalId('answers', $xml['AcceptedAnswerId']);
+            $question_id = $this->getExternalId('questions', $xml['Id']);
+            fwrite($f, trim($this->db->update($settings['table'], ['accepted_answer_id' => $answer_id])->where('id', $question_id)->dump(true)) . ";\n");
+            $i++;
+        }
+
+        fclose($f);
+        echo "Done. $i accepted answers processed.\n";
+    }
+
+
     protected function extractTags($str){
         $tags = explode('><', trim($str, '<>'));
         if(isset($tags[0]) && $tags[0] == ''){
@@ -244,7 +267,7 @@ class DumpImport{
         $id = $col == 'external_id' ? (int) $id : (string) $id;
         if(!isset($this->hashTables[$table])){
             echo "  Retrieving $table.$col hash...";
-            $this->hashTables[$table] = $this->db->select($table)->fetchPairs($col, 'id');
+            $this->hashTables[$table] = $this->db->select($table)->where('site_id', $this->config['site_id'])->fetchPairs($col, 'id');
             echo "Done\n";
         }
         return $this->hashTables[$table][$id] ?? NULL;
