@@ -69,7 +69,8 @@
       "callback": "processacceptedAnswers",
       "input": "Posts.xml",
       "output": "accepted.sql",
-      "table": "questions"
+      "table_questions": "questions",
+      "table_answers": "answers"
     },
 
 

@@ -243,9 +243,10 @@ class DumpImport{
             if($xml['PostTypeId'] != '1' || !isset($xml['AcceptedAnswerId'])){
                 continue;
             }
-            $answer_id = $this->getExternalId('answers', $xml['AcceptedAnswerId']);
-            $question_id = $this->getExternalId('questions', $xml['Id']);
-            fwrite($f, trim($this->db->update($settings['table'], ['accepted_answer_id' => $answer_id])->where('id', $question_id)->dump(true)) . ";\n");
+            $answer_id = $this->getExternalId($settings['table_answers'], $xml['AcceptedAnswerId']);
+            $question_id = $this->getExternalId($settings['table_questions'], $xml['Id']);
+            fwrite($f, trim($this->db->update($settings['table_questions'], ['accepted_answer_id' => $answer_id])->where('id', $question_id)->dump(true)) . ";\n");
+            fwrite($f, trim($this->db->update($settings['table_answers'], ['is_accepted' => true])->where('id', $answer_id)->dump(true)) . ";\n");
             $i++;
         }
 
