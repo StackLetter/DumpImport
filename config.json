@@ -9,6 +9,7 @@
       "output": "users.sql",
       "table": "users",
       "defaults": ["created_at", "updated_at"],
+      "real_date": true,
 
       "columns": {
         "Id":             ["external_id", "int"],
@@ -29,6 +30,7 @@
       "output": "questions.sql",
       "table": "questions",
       "defaults": ["created_at", "updated_at", "site_id"],
+      "real_date": true,
 
       "columns": {
         "Id":                 ["external_id", "int"],
@@ -51,6 +53,7 @@
       "output": "answers.sql",
       "table": "answers",
       "defaults": ["created_at", "updated_at", "site_id"],
+      "real_date": true,
 
       "columns": {
         "Id":                 ["external_id", "int"],
@@ -80,6 +83,7 @@
       "output": "comments.sql",
       "table": "comments",
       "defaults": ["created_at", "updated_at", "site_id"],
+      "real_date": true,
 
       "columns": {
         "Id":           ["external_id", "int"],

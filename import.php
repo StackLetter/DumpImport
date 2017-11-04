@@ -89,9 +89,9 @@ class DumpImport{
 
         // Add default columns
         if(in_array('created_at', $settings['defaults']))
-            $row['created_at'] = date('Y-m-d H:i:s');
+            $row['created_at'] = isset($settings['real_date']) ? $row['creation_date'] : date('Y-m-d H:i:s');
         if(in_array('updated_at', $settings['defaults']))
-            $row['updated_at'] = date('Y-m-d H:i:s');
+            $row['updated_at'] = isset($settings['real_date']) ? $row['creation_date'] : date('Y-m-d H:i:s');
         if(in_array('site_id', $settings['defaults']))
             $row['site_id'] = $this->config['site_id'];
         return join("\t", array_values($row));
