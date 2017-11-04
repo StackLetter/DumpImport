@@ -127,21 +127,25 @@ class DumpImport{
 
         fwrite($f,$this->generateHeader($settings) . "\n");
 
-        $i = 0;
+        $i = $skip = 0;
         while($node = $streamer->getNode()){
             $xml = simplexml_load_string($node);
             $str = $this->processNode($xml, $settings);
             if($str === false){
+                $skip++;
                 continue;
             }
             fwrite($f, $str . "\n");
             $i++;
+            if($i % 1000 == 0){
+                echo "Processed: $i\n";
+            }
         }
 
         fwrite($f, "\\.\n");
         fclose($f);
 
-        echo "Done. $i rows processed.\n";
+        echo "Done. $i rows processed, $skip skipped.\n";
     }
 
 
@@ -270,12 +274,13 @@ class DumpImport{
 
     protected function getExternalId($table, $id, $col = 'external_id'){
         $id = $col == 'external_id' ? (int) $id : (string) $id;
-        if(!isset($this->hashTables[$table])){
-            echo "  Retrieving $table.$col hash...";
-            $this->hashTables[$table] = $this->db->select([$col, 'id'], $table)->where('site_id', $this->config['site_id'])->fetchPairs($col, 'id');
-            echo "Done\n";
-        }
-        return $this->hashTables[$table][$id] ?? NULL;
+        return $this->db->select('id', $table)->where('site_id', $this->config['site_id'])->and($col, $id)->fetchSingle() ?? NULL;
+        //if(!isset($this->hashTables[$table])){
+        //    echo "  Retrieving $table.$col hash...";
+        //    $this->hashTables[$table] = $this->db->select([$col, 'id'], $table)->where('site_id', $this->config['site_id'])->fetchPairs($col, 'id');
+        //    echo "Done\n";
+        //}
+        //return $this->hashTables[$table][$id] ?? NULL;
     }
 
 }
