@@ -8,7 +8,7 @@
       "input": "Users.xml",
       "output": "users.sql",
       "table": "users",
-      "defaults": ["created_at", "updated_at"],
+      "defaults": ["created_at", "updated_at", "site_id"],
       "real_date": true,
 
       "columns": {

@@ -272,7 +272,7 @@ class DumpImport{
         $id = $col == 'external_id' ? (int) $id : (string) $id;
         if(!isset($this->hashTables[$table])){
             echo "  Retrieving $table.$col hash...";
-            $this->hashTables[$table] = $this->db->select($table)->where('site_id', $this->config['site_id'])->fetchPairs($col, 'id');
+            $this->hashTables[$table] = $this->db->select([$col, 'id'], $table)->where('site_id', $this->config['site_id'])->fetchPairs($col, 'id');
             echo "Done\n";
         }
         return $this->hashTables[$table][$id] ?? NULL;
