@@ -154,23 +154,27 @@ class DumpImport{
         $f = fopen($this->dataDir . '/' . $output, 'w');
         fwrite($f, $this->generateHeader($settings) . "\n");
 
-        $i = 0;
+        $i = $skip = 0;
         while($node = $streamer->getNode()){
             $xml = simplexml_load_string($node);
             if($xml['PostTypeId'] == $post_type){
                 $str = $this->processNode($xml, $settings);
                 if($str === false){
+                    $skip++;
                     continue;
                 }
                 fwrite($f, $str . "\n");
                 $i++;
+            }
+            if($i % 1000 == 0){
+                echo "Processed: $i\n";
             }
         }
 
         fwrite($f, "\\.\n");
         fclose($f);
 
-        echo "Done. $i rows processed.\n";
+        echo "Done. $i rows processed, $skip skipped.\n";
     }
 
 
